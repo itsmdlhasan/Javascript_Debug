@@ -8,12 +8,11 @@ document.getElementById("btn-deposit").addEventListener("click", function () {
   const newDepositAmount = getInputFieldValueById("deposit-field");
   /* 
     1. get previous deposit total by id
-
     */
   const previousDepositTotal = getTextElementValueById("deposit-total");
+
   // calculate new deposit total
   const newDepositTotal = previousDepositTotal + newDepositAmount;
-  console.log(newDepositTotal, previousDepositTotal, newDepositAmount);
   // set deposit total value
   setTextElementValueById("deposit-total", newDepositTotal);
 

@@ -2,8 +2,14 @@ function getInputFieldValueById(inputFieldId) {
   const inputField = document.getElementById(inputFieldId);
   const inputFieldValueString = inputField.value;
   const inputFieldValue = parseFloat(inputFieldValueString);
-  inputField.value = "";
-  return inputFieldValue;
+  if (isNaN(inputFieldValue) || inputFieldValue < 0) {
+    alert("please provide valid input");
+    return 0;
+  }
+  else {
+    inputField.value = "";
+    return inputFieldValue;
+  }
 }
 
 function getTextElementValueById(elementId) {

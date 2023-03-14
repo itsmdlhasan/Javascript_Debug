@@ -15,9 +15,9 @@ loadProducts('https://fakestoreapi.com/products');
 const showProducts = (products) => {
 
    setInnerText('total_products', products.length);
-
+   
    document.getElementById("all-products").innerHTML = "";
-
+   
    const allProducts = products;
    for (const product of allProducts) {
       const image = product.image;
@@ -42,7 +42,7 @@ const showProducts = (products) => {
 
 let count = 0;
 
-const addToCart = (price) => {
+const addToCart = (id, price) => {
    count = count + 1;
    updatePrice('price', price);
    updateTaxAndCharge();
@@ -73,8 +73,8 @@ const getInputValue = (id) => {
 const updatePrice = (id, value) => {
    const convertedOldPrice = getInputValue(id);
    const convertPrice = parseFloat(value);
-   const total = convertedOldPrice + convertPrice;
-   document.getElementById(id).innerText = total.toFixed(2);
+   const total = (convertedOldPrice + convertPrice).toFixed(2);
+   document.getElementById(id).innerText = total;
 };
 
 // set innerText function
@@ -85,6 +85,7 @@ const setInnerText = (id, value) => {
 // update delivery charge and total Tax
 const updateTaxAndCharge = () => {
    const priceConverted = getInputValue('price');
+
    if (priceConverted > 500) {
       setInnerText('delivery-charge', 60);
       setInnerText('total-tax', (priceConverted * 0.4).toFixed(2));
@@ -93,7 +94,7 @@ const updateTaxAndCharge = () => {
       setInnerText('delivery-charge', 50);
       setInnerText('total-tax', (priceConverted * 0.3).toFixed(2));
    }
-   else if (priceConverted > 200) {
+   else {
       setInnerText('delivery-charge', 30);
       setInnerText('total-tax', (priceConverted * 0.2).toFixed(2));
    }
@@ -111,8 +112,9 @@ const updateTotal = () => {
 // search by category
 document.getElementById("search-btn").addEventListener("click", function () {
    const inputField = document.getElementById("input-value").value;
+   console.log(arr);
    const searchedProduct = arr[0].filter((p) =>
       p.category.startsWith(`${inputField}`)
-      );
+   );
    showProducts(searchedProduct);
 });
